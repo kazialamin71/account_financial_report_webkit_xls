@@ -284,7 +284,10 @@ class TrialBalanceXls(report_xls):
                     debit_amount = float(_p['debit_accounts'][current_account.id])
                     credit_amount = float(_p['credit_accounts'][current_account.id])
                     opening_amnt = float(_p['init_balance_accounts'][current_account.id])
-                    closing_balnce = debit_amount-credit_amount+opening_amnt
+                    if current_account.user_type.id in (8, 10, 9, 11):
+                        closing_balnce = debit_amount - credit_amount
+                    else:
+                        closing_balnce = debit_amount - credit_amount + opening_amnt
                     # if current_account.type != 'view':
                     #
                     #     if (float(_p['debit_accounts'][current_account.id])+float(_p['init_balance_accounts'][current_account.id])) > float(_p['init_balance_accounts'][current_account.id]):
